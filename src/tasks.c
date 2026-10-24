@@ -3,16 +3,60 @@
 
 void add_task(void){
 
+    //variables
+    int highest_id = 0;
+    
+    
+    
+    //file_pointer declaration
+    FILE * fp;
+
     //struct variables
     struct addTask task;
 
+    //reading the file for id's
 
-    //read the task description
+    fp = fopen("data/tasks.txt", "r");
+     
+
+    //if fp not null open the file
+    if (fp != NULL){
+
+        //read all the task_id
+        while(fscanf(fp, "[%d]",&task.task_id) ==  1){
+
+            //compare the task_id with highest_id
+            if(task.task_id>highest_id){
+                highest_id = task.task_id;
+            }
+
+        }
+
+        fclose(fp);//close the file
+       
+        
+    }
+    
+    task.task_id = highest_id + 1; //id updation
+    
+    
+    
+
+    //opening file and appending task
+    
+    fp = fopen("data/tasks.txt","a");
+
+    //null check before using file
+    fp == NULL;
+
+    //user input
     printf("Enter the task description:");
     fgets(task.task_desc, sizeof(task.task_desc), stdin);
 
-    //testing
-    printf("input: %s\n",task.task_desc);
-   
+    //puts the task_desc into the file
+    fprintf(fp, "[%d]  ||  %s", task.task_id, task.task_desc);
+
+
+    fclose(fp); //closes the file
     
 }
