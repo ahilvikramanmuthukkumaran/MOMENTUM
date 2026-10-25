@@ -5,6 +5,7 @@ void add_task(void){
 
     //variables
     int highest_id = 0;
+    char line[100];
     
     
     
@@ -23,21 +24,23 @@ void add_task(void){
     if (fp != NULL){
 
         //read all the task_id
-        while(fscanf(fp, "[%d]",&task.task_id) ==  1){
+        while(fgets(line,sizeof(line), fp) !=  NULL){
+
+            //extracting task id
+            sscanf(line, "[%d]", &task.task_id);
 
             //compare the task_id with highest_id
             if(task.task_id>highest_id){
-                highest_id = task.task_id;
-            }
-
+                highest_id = task.task_id;//assing task_id
+            }    
         }
-
-        fclose(fp);//close the file
-       
-        
+       fclose(fp);//close the file   
     }
     
     task.task_id = highest_id + 1; //id updation
+    
+    
+     
     
     
     
@@ -56,7 +59,8 @@ void add_task(void){
     //puts the task_desc into the file
     fprintf(fp, "[%d]  ||  %s", task.task_id, task.task_desc);
 
-
+    
+    
     fclose(fp); //closes the file
     
 }
