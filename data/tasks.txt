@@ -1,3 +1,0 @@
-[1]  ||  do dl
-[2]  ||  do dm
-[2]  ||  do momentum
